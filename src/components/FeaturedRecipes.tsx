@@ -1,4 +1,5 @@
 import RecipeCard from "./RecipeCard";
+import { Icon } from "./ui/icon";
 
 const featuredRecipes = [
   {
@@ -72,15 +73,29 @@ const FeaturedRecipes = () => {
   return (
     <section className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold font-merriweather text-gray-800">
-          Популярные рецепты
-        </h2>
-        <a
-          href="#"
-          className="text-recipe-peach hover:text-orange-600 font-medium"
-        >
-          Смотреть все →
-        </a>
+        <div>
+          <h2 className="text-2xl font-bold font-merriweather text-gray-800">
+            Популярные рецепты
+          </h2>
+          <p className="text-gray-600 mt-1">
+            Проверенные рецепты от наших поваров
+          </p>
+        </div>
+        <div className="flex items-center space-x-4">
+          <select className="px-4 py-2 border border-gray-200 rounded-lg focus:border-recipe-peach focus:ring-recipe-peach text-sm">
+            <option>Сортировать по популярности</option>
+            <option>По времени приготовления</option>
+            <option>По сложности</option>
+            <option>По рейтингу</option>
+          </select>
+          <a
+            href="#"
+            className="text-recipe-peach hover:text-orange-600 font-medium flex items-center space-x-1"
+          >
+            <span>Смотреть все</span>
+            <Icon name="ArrowRight" size={16} />
+          </a>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Icon from "@/components/ui/icon";
+import AdvancedFilters from "./AdvancedFilters";
 
 const categories = [
   { name: "Все", icon: "Utensils", color: "bg-gray-100 text-gray-700" },
@@ -23,22 +25,42 @@ const categories = [
 ];
 
 const CategoryFilter = () => {
+  const [activeCategory, setActiveCategory] = useState("Все");
+  const [showAdvanced, setShowAdvanced] = useState(false);
+
   return (
-    <div className="container mx-auto px-4 py-6">
-      <h2 className="text-xl font-semibold font-merriweather mb-4 text-gray-800">
-        Категории рецептов
-      </h2>
-      <div className="flex flex-wrap gap-3">
+    <div className="container mx-auto px-4 py-6 bg-white shadow-sm">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold font-merriweather text-gray-800">
+          Найти рецепты
+        </h2>
+        <button
+          onClick={() => setShowAdvanced(!showAdvanced)}
+          className="flex items-center space-x-2 text-recipe-peach hover:text-orange-600 transition-colors"
+        >
+          <Icon name="Filter" size={18} />
+          <span className="text-sm font-medium">Фильтры</span>
+        </button>
+      </div>
+
+      <div className="flex flex-wrap gap-3 mb-4">
         {categories.map((category) => (
           <button
             key={category.name}
-            className={`category-badge ${category.color} hover:shadow-md transition-all duration-200 flex items-center space-x-2`}
+            onClick={() => setActiveCategory(category.name)}
+            className={`category-badge ${
+              activeCategory === category.name
+                ? "bg-recipe-peach text-orange-800 shadow-md"
+                : category.color
+            } hover:shadow-md transition-all duration-200 flex items-center space-x-2`}
           >
             <Icon name={category.icon as any} size={16} />
             <span>{category.name}</span>
           </button>
         ))}
       </div>
+
+      {showAdvanced && <AdvancedFilters />}
     </div>
   );
 };
